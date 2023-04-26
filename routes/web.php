@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,4 @@ Route::put('url-save/{id}', [BrandController::class,'urlstore'])->name('url.stor
 Route::get('/images', [ImageController::class, 'index']);
 Route::get('create', [ImageController::class, 'create']);
 Route::get('column', [BrandController::class, 'create']);
+Route::get('store', [UserController::class, 'store']);
