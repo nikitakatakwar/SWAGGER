@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('brandSave/{id}', [BrandController::class,'store'])->name('brand.store');
 Route::put('url-save/{id}', [BrandController::class,'urlstore'])->name('url.store');
 Route::get('/index', [BrandController::class, 'index']);
-
+Route::put('url', [UserController::class, 'brandurl'])->name('url');

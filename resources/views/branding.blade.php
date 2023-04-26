@@ -98,7 +98,8 @@ body {
                         <h1 class="modal-title">External resources links settings</h1>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="{{ route('url.store',['id'=>1]) }}" enctype="multipart/form-data">
+                        {{-- <form method="post" action="{{ route('url.store',['id'=>1]) }}" enctype="multipart/form-data"> --}}
+                        <form method="post" action="{{ url('url') }}" enctype="multipart/form-data">
                             @method('PUT')
                             <div class="form-group">
                                 @csrf

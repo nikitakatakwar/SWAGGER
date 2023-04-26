@@ -29,3 +29,4 @@ Route::get('/images', [ImageController::class, 'index']);
 Route::get('create', [ImageController::class, 'create']);
 Route::get('column', [BrandController::class, 'create']);
 Route::get('store', [UserController::class, 'store']);
+Route::put('url', [UserController::class, 'brandurl'])->name('url');

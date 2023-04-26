@@ -252,6 +252,164 @@
                     }
                 }
             }
+        },
+        "/url": {
+            "put": {
+                "tags": [
+                    "Settings"
+                ],
+                "summary": "Update BrandSettings url in DB",
+                "description": "Update BrandSettings url in DB",
+                "operationId": "brandurl",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of BrandSettings",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "privacy_policy_url",
+                                    "terms_and_conditions_url",
+                                    "legal_disclaimer_url",
+                                    "knowledge_base_url",
+                                    "faq_url",
+                                    "service_docs_url",
+                                    "service_tutorials_url",
+                                    "product_api_url",
+                                    "api_code_github_repo_url",
+                                    "ask_a_question_url",
+                                    "ssh_key_generation_tutorial_url",
+                                    "coupon_code_terms_and_conditions_url",
+                                    "referral_terms_and_conditions_url",
+                                    "facebook_url",
+                                    "twitter_url",
+                                    "linkedIn_url",
+                                    "object_storage_s3cmd_doc_url"
+                                ],
+                                "properties": {
+                                    "privacy_policy_url": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "http://test/phpmyadmin/"
+                                    },
+                                    "terms_and_conditions_url": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "http://test/phpmyadmin/"
+                                    },
+                                    "legal_disclaimer_url": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "http://test/phpmyadmin/"
+                                    },
+                                    "knowledge_base_url": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "http://test/phpmyadmin/"
+                                    },
+                                    "faq_url": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "http://test/phpmyadmin/"
+                                    },
+                                    "service_docs_url": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "http://test/phpmyadmin/"
+                                    },
+                                    "service_tutorials_url": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "http://test/phpmyadmin/"
+                                    },
+                                    "product_api_url": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "http://test/phpmyadmin/"
+                                    },
+                                    "api_code_github_repo_url": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "http://test/phpmyadmin/"
+                                    },
+                                    "ask_a_question_url": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "http://test/phpmyadmin/"
+                                    },
+                                    "ssh_key_generation_tutorial_url": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "http://test/phpmyadmin/"
+                                    },
+                                    "coupon_code_terms_and_conditions_url": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "http://test/phpmyadmin/"
+                                    },
+                                    "referral_terms_and_conditions_url": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "http://test/phpmyadmin/"
+                                    },
+                                    "facebook_url": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "http://test/phpmyadmin/"
+                                    },
+                                    "twitter_url": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "http://test/phpmyadmin/"
+                                    },
+                                    "linkedIn_url": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "http://test/phpmyadmin/"
+                                    },
+                                    "object_storage_s3cmd_doc_url": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "http://test/phpmyadmin/"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
