@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FormValidtionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +31,6 @@ Route::get('create', [ImageController::class, 'create']);
 Route::get('column', [BrandController::class, 'create']);
 Route::get('store', [UserController::class, 'store']);
 Route::put('url', [UserController::class, 'brandurl'])->name('url');
+Route::get('urlform', [UserController::class, 'urlform'])->name('url');
+Route::get('/form', [FormValidtionController::class, 'createUserForm']);
+Route::post('/form', [FormValidtionController::class, 'UserForm'])->name('validate.form');

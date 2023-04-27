@@ -5,9 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Column;
 use App\Models\User;
+use App\Http\Requests\StoreUrlRequest;
+use App\Http\Requests\StorePostRequest;
+use App\Models\BrandSettings;
 
 class UserController extends Controller
 {
+    public function urlform()
+    {
+       return view('urlform');
+    }
+
+    public function Imgform()
+    {
+       return view('imgform');
+    }
     public function store()
     {
         $key="app_name";
@@ -17,67 +29,49 @@ class UserController extends Controller
 
       /**
      * @OA\Put(
-     *     path="/url",
-     *     operationId="brandurl",
-     *     tags={"Settings"},
-     *     summary="Update BrandSettings url in DB",
-     *     description="Update BrandSettings url in DB",
-     *     @OA\Parameter(name="id", in="path", description="Id of BrandSettings", required=false,
-     *         @OA\Schema(type="integer")
-     *     ),
-     *     @OA\RequestBody(
-     *        required=true,
-     *        @OA\JsonContent(
-     *           required={"privacy_policy_url", "terms_and_conditions_url", "legal_disclaimer_url","knowledge_base_url","faq_url","service_docs_url","service_tutorials_url","product_api_url","api_code_github_repo_url","ask_a_question_url","ssh_key_generation_tutorial_url","coupon_code_terms_and_conditions_url","referral_terms_and_conditions_url","facebook_url","twitter_url","linkedIn_url","object_storage_s3cmd_doc_url"},
-     *           @OA\Property(property="privacy_policy_url", type="string", format="string", example="http://test/phpmyadmin/"),
-     *           @OA\Property(property="terms_and_conditions_url", type="string", format="string", example="http://test/phpmyadmin/"),
-     *           @OA\Property(property="legal_disclaimer_url", type="string", format="string", example="http://test/phpmyadmin/"),
-     *           @OA\Property(property="knowledge_base_url", type="string", format="string", example="http://test/phpmyadmin/"),
-     *           @OA\Property(property="faq_url", type="string", format="string", example="http://test/phpmyadmin/"),
-     *           @OA\Property(property="service_docs_url", type="string", format="string", example="http://test/phpmyadmin/"),
-     *           @OA\Property(property="service_tutorials_url", type="string", format="string", example="http://test/phpmyadmin/"),
-     *           @OA\Property(property="product_api_url", type="string", format="string", example="http://test/phpmyadmin/"),
-     *           @OA\Property(property="api_code_github_repo_url", type="string", format="string", example="http://test/phpmyadmin/"),
-     *           @OA\Property(property="ask_a_question_url", type="string", format="string", example="http://test/phpmyadmin/"),
-     *           @OA\Property(property="ssh_key_generation_tutorial_url", type="string", format="string", example="http://test/phpmyadmin/"),
-     *           @OA\Property(property="coupon_code_terms_and_conditions_url", type="string", format="string", example="http://test/phpmyadmin/"),
-     *           @OA\Property(property="referral_terms_and_conditions_url", type="string", format="string", example="http://test/phpmyadmin/"),
-     *           @OA\Property(property="facebook_url", type="string", format="string", example="http://test/phpmyadmin/"),
-     *           @OA\Property(property="twitter_url", type="string", format="string", example="http://test/phpmyadmin/"),
-     *           @OA\Property(property="linkedIn_url", type="string", format="string", example="http://test/phpmyadmin/"),
-     *           @OA\Property(property="object_storage_s3cmd_doc_url", type="string", format="string", example="http://test/phpmyadmin/"),
-     *        ),
-     *     ),
-     *     @OA\Response(
-     *          response=200, description="Success",
-     *          @OA\JsonContent(
-     *             @OA\Property(property="status_code", type="integer", example="200"),
-     *             @OA\Property(property="data",type="object")
+     *      path="/url",
+     *      operationId="brandurl",
+     *      tags={"Settings"},
+     *      summary="Update existing brand setting url",
+     *      description="Returns updated brand setting url data",
+     *      @OA\Parameter(
+     *          name="terms_and_conditions_url",
+     *          description="Column id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
      *          )
-     *       )
-     *  )
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/UpdateUrlRequest")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Success"
+     *      ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
      */
-    public function brandurl(Request $request)
+    public function brandurl(StorePostRequest $request)
     {
-        $request->validate([
-            'privacy_policy_url' => 'url',
-            'terms_and_conditions_url' => 'url',
-            'legal_disclaimer_url' => 'url',
-            'knowledge_base_url' => 'url',
-            'faq_url' => 'url',
-            'service_docs_url' => 'url',
-            'service_tutorials_url' => 'url',
-            'product_api_url' => 'url',
-            'api_code_github_repo_url' => 'url',
-            'ask_a_question_url' => 'url',
-            'ssh_key_generation_tutorial_url' => 'url',
-            'coupon_code_terms_and_conditions_url' => 'url',
-            'referral_terms_and_conditions_url' => 'url',
-            'facebook_url' => 'url',
-            'twitter_url' => 'url',
-            'linkedIn_url' => 'url',
-            'object_storage_s3cmd_doc_url' => 'url',
-        ]);
+        $validated = $request->validated();
 
 
         Column::where('key', 'privacy_policy_url')->update(['value'=>$request->privacy_policy_url]);
@@ -98,6 +92,103 @@ class UserController extends Controller
         Column::where('key', 'linkedIn_url')->update(['value'=>$request->linkedIn_url]);
         Column::where('key', 'object_storage_s3cmd_doc_url')->update(['value'=>$request->object_storage_s3cmd_doc_url]);
 
+        return ["result"=>"data is updated"];
+
    }
+
+    /**
+     * @OA\Post(
+     *      path="/img",
+     *      operationId="brandImage",
+     *      tags={"Settings"},
+     *      summary="Update existing brand setting img",
+     *      description="Returns updated brand setting img data",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="BrandSettings id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     * @OA\RequestBody(
+     *   required=true,
+     *   description="Bulk products Body",
+     *   @OA\JsonContent(ref="#/components/schemas/UpdateImgRequest"),
+     *   @OA\MediaType(
+     *     mediaType="multipart/form-data",
+     *     @OA\Schema(ref="#/components/schemas/UpdateImgRequest")
+     *   ),
+     * ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Success"
+     *      ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
+     */
+
+   public function brandImage(Request $request,$id)
+   {
+
+       $input = $request->all();
+
+       if ($app_logo = $request->file('app_logo')) {
+           $destinationPath = 'images/';
+           $appLogo = date('YmdHis') . "." . $app_logo->getClientOriginalExtension();
+           $app_logo->move($destinationPath, $appLogo);
+           $input['app_logo'] = "$appLogo";
+       }else{
+           unset($app_logo['app_logo']);
+       }
+
+      if ($pdf_logo = $request->file('pdf_logo')) {
+           $destinationPath = 'images/';
+           $pdfLogo = date('YmdHis') . "." . $pdf_logo->getClientOriginalExtension();
+           $pdf_logo->move($destinationPath, $pdfLogo);
+           $input['pdf_logo'] = "$pdfLogo";
+       }else{
+           unset($pdf_logo['pdf_logo']);
+       }
+
+       if ($favicon_logo = $request->file('favicon')) {
+           $destinationPath = 'images/';
+           $faviconLogo = date('YmdHis') . "." . $pdf_logo->getClientOriginalExtension();
+           $favicon_logo->move($destinationPath, $faviconLogo);
+           $input['pdf_logo'] = "$faviconLogo";
+       }else{
+           unset($favicon_logo['favicon']);
+       }
+
+       $brandSetting = BrandSettings::find($id);
+       $brandSetting->app_name=$request->app_name;
+       $brandSetting->app_logo=$appLogo;
+       $brandSetting->pdf_logo=$pdfLogo;
+       $brandSetting->theme_color=$request->theme_color;
+       $brandSetting->secondary_color=$request->secondary_color;
+       $brandSetting->favicon=$faviconLogo;
+       $brandSetting->save();
+
+       return ["result"=>"data is updated"];
+
+
+   }
+
 
 }

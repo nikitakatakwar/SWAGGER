@@ -258,15 +258,15 @@
                 "tags": [
                     "Settings"
                 ],
-                "summary": "Update BrandSettings url in DB",
-                "description": "Update BrandSettings url in DB",
+                "summary": "Update existing brand setting url",
+                "description": "Returns updated brand setting url data",
                 "operationId": "brandurl",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "terms_and_conditions_url",
                         "in": "path",
-                        "description": "Id of BrandSettings",
-                        "required": false,
+                        "description": "Column id",
+                        "required": true,
                         "schema": {
                             "type": "integer"
                         }
@@ -277,136 +277,80 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "privacy_policy_url",
-                                    "terms_and_conditions_url",
-                                    "legal_disclaimer_url",
-                                    "knowledge_base_url",
-                                    "faq_url",
-                                    "service_docs_url",
-                                    "service_tutorials_url",
-                                    "product_api_url",
-                                    "api_code_github_repo_url",
-                                    "ask_a_question_url",
-                                    "ssh_key_generation_tutorial_url",
-                                    "coupon_code_terms_and_conditions_url",
-                                    "referral_terms_and_conditions_url",
-                                    "facebook_url",
-                                    "twitter_url",
-                                    "linkedIn_url",
-                                    "object_storage_s3cmd_doc_url"
-                                ],
-                                "properties": {
-                                    "privacy_policy_url": {
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "http://test/phpmyadmin/"
-                                    },
-                                    "terms_and_conditions_url": {
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "http://test/phpmyadmin/"
-                                    },
-                                    "legal_disclaimer_url": {
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "http://test/phpmyadmin/"
-                                    },
-                                    "knowledge_base_url": {
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "http://test/phpmyadmin/"
-                                    },
-                                    "faq_url": {
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "http://test/phpmyadmin/"
-                                    },
-                                    "service_docs_url": {
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "http://test/phpmyadmin/"
-                                    },
-                                    "service_tutorials_url": {
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "http://test/phpmyadmin/"
-                                    },
-                                    "product_api_url": {
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "http://test/phpmyadmin/"
-                                    },
-                                    "api_code_github_repo_url": {
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "http://test/phpmyadmin/"
-                                    },
-                                    "ask_a_question_url": {
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "http://test/phpmyadmin/"
-                                    },
-                                    "ssh_key_generation_tutorial_url": {
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "http://test/phpmyadmin/"
-                                    },
-                                    "coupon_code_terms_and_conditions_url": {
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "http://test/phpmyadmin/"
-                                    },
-                                    "referral_terms_and_conditions_url": {
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "http://test/phpmyadmin/"
-                                    },
-                                    "facebook_url": {
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "http://test/phpmyadmin/"
-                                    },
-                                    "twitter_url": {
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "http://test/phpmyadmin/"
-                                    },
-                                    "linkedIn_url": {
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "http://test/phpmyadmin/"
-                                    },
-                                    "object_storage_s3cmd_doc_url": {
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "http://test/phpmyadmin/"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/UpdateUrlRequest"
                             }
                         }
                     }
                 },
                 "responses": {
                     "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "status_code": {
-                                            "type": "integer",
-                                            "example": "200"
-                                        },
-                                        "data": {
-                                            "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/img": {
+            "post": {
+                "tags": [
+                    "Settings"
+                ],
+                "summary": "Update existing brand setting img",
+                "description": "Returns updated brand setting img data",
+                "operationId": "brandImage",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "BrandSettings id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Bulk products Body",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateImgRequest"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateImgRequest"
                             }
                         }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -440,6 +384,182 @@
                         "description": "secondary_color",
                         "type": "string",
                         "example": "Red"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateImgRequest": {
+                "title": "Img Update Request",
+                "description": "Update Img request body",
+                "required": [
+                    "app_name",
+                    "app_logo",
+                    "pdf_logo",
+                    "theme_color",
+                    "favicon",
+                    "secondary_color"
+                ],
+                "properties": {
+                    "app_name": {
+                        "title": "app_name",
+                        "description": "app_name",
+                        "type": "string",
+                        "example": "Console Infotech"
+                    },
+                    "theme_color": {
+                        "title": "theme_color",
+                        "description": "theme_color",
+                        "type": "string",
+                        "example": "Blue"
+                    },
+                    "secondary_color": {
+                        "title": "secondary_color",
+                        "description": "secondary_color",
+                        "type": "string",
+                        "example": "Black"
+                    },
+                    "app_logo": {
+                        "description": "App logo Image",
+                        "type": "file",
+                        "format": "file"
+                    },
+                    "pdf_logo": {
+                        "description": "Pdf Logo Image",
+                        "type": "file",
+                        "format": "file"
+                    },
+                    "favicon": {
+                        "description": "Favicon Logo Image",
+                        "type": "file",
+                        "format": "file"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateUrlRequest": {
+                "title": "Url Update Request",
+                "description": "Update Url request body",
+                "required": [
+                    "terms_and_conditions_url",
+                    "privacy_policy_url",
+                    "legal_disclaimer_url",
+                    "knowledge_base_url",
+                    "faq_url",
+                    "service_docs_url",
+                    "service_tutorials_url",
+                    "product_api_url",
+                    "api_code_github_repo_url",
+                    "ask_a_question_url",
+                    "ssh_key_generation_tutorial_url",
+                    "coupon_code_terms_and_conditions_url",
+                    "referral_terms_and_conditions_url",
+                    "facebook_url",
+                    "twitter_url",
+                    "linkedIn_url",
+                    "object_storage_s3cmd_doc_url"
+                ],
+                "properties": {
+                    "terms_and_conditions_url": {
+                        "title": "terms_and_conditions_url",
+                        "description": "terms_and_conditions_url name",
+                        "type": "string",
+                        "example": "http://127.0.0.1:8000/api/"
+                    },
+                    "privacy_policy_url": {
+                        "title": "privacy_policy_url",
+                        "description": "privacy_policy_url",
+                        "type": "string",
+                        "example": "http://127.0.0.1:8000/api/"
+                    },
+                    "legal_disclaimer_url": {
+                        "title": "legal_disclaimer_url",
+                        "description": "legal_disclaimer_url",
+                        "type": "string",
+                        "example": "http://127.0.0.1:8000/api/"
+                    },
+                    "knowledge_base_url": {
+                        "title": "knowledge_base_url",
+                        "description": "knowledge_base_url",
+                        "type": "string",
+                        "example": "http://127.0.0.1:8000/api/"
+                    },
+                    "faq_url": {
+                        "title": "faq_url",
+                        "description": "faq_url",
+                        "type": "string",
+                        "example": "http://127.0.0.1:8000/api/"
+                    },
+                    "service_docs_url": {
+                        "title": "service_docs_url",
+                        "description": "service_docs_url",
+                        "type": "string",
+                        "example": "http://127.0.0.1:8000/api/"
+                    },
+                    "service_tutorials_url": {
+                        "title": "service_tutorials_url",
+                        "description": "service_tutorials_url",
+                        "type": "string",
+                        "example": "http://127.0.0.1:8000/api/"
+                    },
+                    "product_api_url": {
+                        "title": "product_api_url",
+                        "description": "product_api_url",
+                        "type": "string",
+                        "example": "http://127.0.0.1:8000/api/"
+                    },
+                    "api_code_github_repo_url": {
+                        "title": "api_code_github_repo_url",
+                        "description": "api_code_github_repo_url",
+                        "type": "string",
+                        "example": "http://127.0.0.1:8000/api/"
+                    },
+                    "ask_a_question_url": {
+                        "title": "ask_a_question_url",
+                        "description": "ask_a_question_url",
+                        "type": "string",
+                        "example": "http://127.0.0.1:8000/api/"
+                    },
+                    "ssh_key_generation_tutorial_url": {
+                        "title": "ssh_key_generation_tutorial_url",
+                        "description": "ssh_key_generation_tutorial_url",
+                        "type": "string",
+                        "example": "http://127.0.0.1:8000/api/"
+                    },
+                    "coupon_code_terms_and_conditions_url": {
+                        "title": "coupon_code_terms_and_conditions_url",
+                        "description": "coupon_code_terms_and_conditions_url",
+                        "type": "string",
+                        "example": "http://127.0.0.1:8000/api/"
+                    },
+                    "referral_terms_and_conditions_url": {
+                        "title": "referral_terms_and_conditions_url",
+                        "description": "referral_terms_and_conditions_url",
+                        "type": "string",
+                        "example": "http://127.0.0.1:8000/api/"
+                    },
+                    "facebook_url": {
+                        "title": "facebook_url",
+                        "description": "facebook_url",
+                        "type": "string",
+                        "example": "http://127.0.0.1:8000/api/"
+                    },
+                    "twitter_url": {
+                        "title": "twitter_url",
+                        "description": "twitter_url",
+                        "type": "string",
+                        "example": "http://127.0.0.1:8000/api/"
+                    },
+                    "linkedIn_url": {
+                        "title": "linkedIn_url",
+                        "description": "linkedIn_url",
+                        "type": "string",
+                        "example": "http://127.0.0.1:8000/api/"
+                    },
+                    "object_storage_s3cmd_doc_url": {
+                        "title": "object_storage_s3cmd_doc_url",
+                        "description": "object_storage_s3cmd_doc_url",
+                        "type": "string",
+                        "example": "http://127.0.0.1:8000/api/"
                     }
                 },
                 "type": "object"
