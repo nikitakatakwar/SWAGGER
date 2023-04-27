@@ -184,7 +184,6 @@ class UserController extends Controller
        $brandSetting->secondary_color=$request->secondary_color;
        $brandSetting->favicon=$faviconLogo;
        $brandSetting->save();
-
        return ["result"=>"data is updated"];
 
 
