@@ -18,7 +18,7 @@
                  @endif
                  <form class="w-px-500 p-3 p-md-3" action="{{ route('img',['id'=>1]) }}" method="post" enctype="multipart/form-data">
                     @csrf
-                    {{-- @method('PUT') --}}
+                    @method('PUT')
                     <div class="row mb-3">
                         {{-- <label class="col-sm-3 col-form-label">File</label>
                         <div class="col-xs-12 col-sm-12 col-md-12">

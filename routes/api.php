@@ -24,4 +24,4 @@ Route::post('brandSave/{id}', [BrandController::class,'store'])->name('brand.sto
 Route::put('url-save/{id}', [BrandController::class,'urlstore'])->name('url.store');
 Route::get('/index', [BrandController::class, 'index']);
 Route::put('url', [UserController::class, 'brandurl'])->name('url');
-Route::post('img/{id}', [UserController::class, 'brandImage'])->name('img');
+Route::put('img/{id}', [UserController::class, 'brandImage'])->name('img');

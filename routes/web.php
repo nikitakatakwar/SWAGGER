@@ -34,3 +34,5 @@ Route::put('url', [UserController::class, 'brandurl'])->name('url');
 Route::get('urlform', [UserController::class, 'urlform'])->name('url');
 Route::get('/form', [FormValidtionController::class, 'createUserForm']);
 Route::post('/form', [FormValidtionController::class, 'UserForm'])->name('validate.form');
+Route::post('img/{id}', [UserController::class, 'brandImage'])->name('img');
+Route::get('img', [UserController::class, 'Imgform']);

@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Http\Requests\StoreUrlRequest;
 use App\Http\Requests\StorePostRequest;
 use App\Models\BrandSettings;
+use App\Http\Resources\BrandSettingsResource;
 
 class UserController extends Controller
 {
@@ -35,7 +36,7 @@ class UserController extends Controller
      *      summary="Update existing brand setting url",
      *      description="Returns updated brand setting url data",
      *      @OA\Parameter(
-     *          name="terms_and_conditions_url",
+     *          name="id",
      *          description="Column id",
      *          required=true,
      *          in="path",
@@ -97,8 +98,8 @@ class UserController extends Controller
    }
 
     /**
-     * @OA\Post(
-     *      path="/img",
+     * @OA\Put(
+     *      path="/img/{id}",
      *      operationId="brandImage",
      *      tags={"Settings"},
      *      summary="Update existing brand setting img",
@@ -114,7 +115,7 @@ class UserController extends Controller
      *      ),
      * @OA\RequestBody(
      *   required=true,
-     *   description="Bulk products Body",
+     *   description="Bulk BrandSettings Body",
      *   @OA\JsonContent(ref="#/components/schemas/UpdateImgRequest"),
      *   @OA\MediaType(
      *     mediaType="multipart/form-data",
@@ -148,6 +149,10 @@ class UserController extends Controller
    {
 
        $input = $request->all();
+
+       $appLogo ="";
+       $pdfLogo="";
+       $faviconLogo="";
 
        if ($app_logo = $request->file('app_logo')) {
            $destinationPath = 'images/';
@@ -185,9 +190,5 @@ class UserController extends Controller
        $brandSetting->favicon=$faviconLogo;
        $brandSetting->save();
        return ["result"=>"data is updated"];
-
-
    }
-
-
 }

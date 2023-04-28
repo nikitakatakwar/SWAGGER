@@ -263,7 +263,7 @@
                 "operationId": "brandurl",
                 "parameters": [
                     {
-                        "name": "terms_and_conditions_url",
+                        "name": "id",
                         "in": "path",
                         "description": "Column id",
                         "required": true,
@@ -301,8 +301,8 @@
                 }
             }
         },
-        "/img": {
-            "post": {
+        "/img/{id}": {
+            "put": {
                 "tags": [
                     "Settings"
                 ],
@@ -321,7 +321,7 @@
                     }
                 ],
                 "requestBody": {
-                    "description": "Bulk products Body",
+                    "description": "Bulk BrandSettings Body",
                     "required": true,
                     "content": {
                         "multipart/form-data": {
@@ -358,6 +358,63 @@
     },
     "components": {
         "schemas": {
+            "BrandSettings": {
+                "title": "BrandSettings",
+                "description": "BrandSettings model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "app_name": {
+                        "title": "app_name",
+                        "description": "Name of the new project",
+                        "type": "string",
+                        "example": "A nice project"
+                    },
+                    "theme_color": {
+                        "title": "theme_color",
+                        "description": "theme_color",
+                        "type": "string",
+                        "example": "Pink"
+                    },
+                    "created_at": {
+                        "title": "Created at",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "updated_at": {
+                        "title": "Updated at",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "deleted_at": {
+                        "title": "Deleted at",
+                        "description": "Deleted at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "secondary_color": {
+                        "title": "secondary_color",
+                        "description": "Author's id of the new project",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "BrandSettings"
+                }
+            },
             "UpdateBrandSettingRequest": {
                 "title": "Profile Update Request",
                 "description": "Update User Profile request body",
@@ -563,6 +620,24 @@
                     }
                 },
                 "type": "object"
+            },
+            "BrandSettingsResource": {
+                "title": "BrandSettingsResource",
+                "description": "BrandSettings resource",
+                "properties": {
+                    "data": {
+                        "title": "Data",
+                        "description": "Data wrapper",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/BrandSettings"
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "BrandSettingsResource"
+                }
             }
         }
     },
